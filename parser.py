@@ -12,17 +12,16 @@ quote="\""
 g.write("PrintWriter out = response.getWriter();\n")
 for line in f:
 	line=line.rstrip()
-	elems=line.split('"')
-	j=len(elems)
-	k=0
 	g.write("out.println(")
 	g.write(quote)
-	for i in elems:
-		k+=1
-		g.write(i)
-		if(k<j-1):
+	if("\"" in line):
+		elems=line.split('"')
+		for i in elems:
+			g.write(i)
 			g.write(slash)
 			g.write(quote)
+	else:
+		g.write(line)
 	g.write(quote)
 	g.write(");\n")
 f.close()
